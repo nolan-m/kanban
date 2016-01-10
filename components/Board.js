@@ -34,13 +34,15 @@ var Board = React.createClass({
     board: {
       border: '1px solid black',
       background: '#999',
-      padding: 15
+      padding: 15,
+      minHeight: 75
     },
     addButton: {
       marginBottom: 10,
       width: 100,
       padding: 10,
-      fontSize: 16
+      fontSize: 16,
+      cursor: 'pointer'
     }
   }
 
