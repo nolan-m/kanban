@@ -11,10 +11,10 @@ var Card = React.createClass({
 
   styles: {
     card: {
-      display: 'inline-block',
       border: '1px solid black',
       width: 250,
       padding: 15,
+      marginBottom: 10,
       background: '#F2F2F2'
     },
     task: {
