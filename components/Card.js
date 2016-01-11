@@ -1,12 +1,43 @@
 import React from 'react';
 
 var Card = React.createClass({
+
+  getInitialState: function () {
+    return {
+      editMode: false,
+      task: ''
+    };
+  },
+
   render: function(){
     return (
       <div style={this.styles.card}>
-        <p style={this.styles.task}>{this.props.task}</p>
+        { this.state.editMode ? 
+          <div>
+            <p style={this.styles.task}>{this.props.task}</p>
+            <div>
+              <button onClick={this.toggleEdit}>Edit</button>
+            </div>
+          </div>
+          :
+          <div>
+            <input value={this.props.task} onChange={this.changeTaskValue}></input>
+            <div>
+              <button onClick={this.toggleEdit}>Done</button>
+            </div>
+          </div>
+        }
+        
       </div>
     );
+  },
+
+  toggleEdit: function toggleEdit () {
+    this.setState({ editMode: !this.state.editMode })
+  },
+
+  changeTaskValue: function changeTaskValue (e) {
+    console.log('value changed');
   },
 
   styles: {
