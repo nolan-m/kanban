@@ -9,21 +9,25 @@ var Card = React.createClass({
     };
   },
 
+  componentWillMount: function () {
+    this.setState({ task: this.props.task});
+  },
+
   render: function(){
     return (
       <div style={this.styles.card}>
         { this.state.editMode ? 
           <div>
-            <p style={this.styles.task}>{this.props.task}</p>
+            <input ref='taskInput' value={this.state.task} onChange={this.changeTaskValue}></input>
             <div>
-              <button onClick={this.toggleEdit}>Edit</button>
+              <button onClick={this.toggleEdit}>Done</button>
             </div>
           </div>
           :
           <div>
-            <input value={this.props.task} onChange={this.changeTaskValue}></input>
+            <p style={this.styles.task}>{this.state.task}</p>
             <div>
-              <button onClick={this.toggleEdit}>Done</button>
+              <button onClick={this.toggleEdit}>Edit</button>
             </div>
           </div>
         }
@@ -37,7 +41,7 @@ var Card = React.createClass({
   },
 
   changeTaskValue: function changeTaskValue (e) {
-    console.log('value changed');
+    this.setState({ task: e.target.value });
   },
 
   styles: {
