@@ -30,7 +30,9 @@ CardStore.createCard = function () {
 };
 
 CardStore.updateTask = function (cardIndex, task) {
-	console.log('Change card number ' + cardIndex + ' to ' + task);
+	curentState.cards[cardIndex].task = task;
+	this.emitChange();
+	// console.log('Change card number ' + cardIndex + ' to ' + task);
 };
 
 
