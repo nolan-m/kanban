@@ -7,8 +7,8 @@ var Column = React.createClass({
     var cards = [];
 
     this.props.cards.forEach(function (card, index) {
-      cards.push(<Card key={'card'+index} task={card.task} index={index} />);
-    });
+      cards.push(<Card key={'card'+index} task={card.task} cardIndex={index}  columnIndex={this.props.index} />);
+    }, this);
 
     return (
       <div style={this.styles.column}>
@@ -24,8 +24,9 @@ var Column = React.createClass({
       width: 300,
       height: '100%',
       padding: 15,
-      marginBottom: 10,
-      background: '#E3E3E3'
+      margin: '0 auto',
+      background: '#E3E3E3',
+      float: 'left'
     }
   }
 

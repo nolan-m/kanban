@@ -5,8 +5,12 @@ import CardStore from '../stores/CardStore';
 var Board = React.createClass({
   getInitialState: function () {
     return { 
-      cards: [] 
+      columns: [] 
     };
+  },
+
+  componentWillMount: function () {
+    this.setState(CardStore.getCurrentState());
   },
 
   componentDidMount: function() {
@@ -18,12 +22,15 @@ var Board = React.createClass({
   },
 
   render: function(){
+    var columns = this.state.columns.map( function (column, index) {
+      return <Column key={'column'+index} index={index} title={column.title} cards={column.cards} />
+    });
 
     return (
       <div>
         <button style={this.styles.addButton} onClick={this.addTask}>Add Task</button>
         <div style={this.styles.board}>
-          <Column title={'To Do'} cards={this.state.cards} />
+          { columns }
         </div>
       </div>
     );
@@ -42,8 +49,8 @@ var Board = React.createClass({
       border: '1px solid black',
       background: '#999',
       padding: 15,
-      minHeight: 75,
-      height: '100%'
+      height: '100%',
+      display: 'flex'
     },
     addButton: {
       marginBottom: 10,

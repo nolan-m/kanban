@@ -5,7 +5,20 @@ var CHANGE_EVENT = 'change';
 var CardStore = new EventEmitter();
 
 var curentState = {
-	cards: []
+	columns: [
+		{
+			title: 'To Do',
+			cards: []
+		},
+		{
+			title: 'In Progress',
+			cards: []
+		},
+		{
+			title: 'Completed',
+			cards: []
+		}
+	]
 };
 
 CardStore.emitChange = function() {
@@ -25,12 +38,12 @@ CardStore.removeChangeListener = function(callback) {
 };
 
 CardStore.createCard = function () {
-	curentState.cards.push({task: 'New task'});
+	this.getCurrentState().columns[0].cards.push({task: 'New task'});
 	this.emitChange();
 };
 
-CardStore.updateTask = function (cardIndex, task) {
-	curentState.cards[cardIndex].task = task;
+CardStore.updateTask = function (columnIndex, cardIndex, task) {
+	curentState.columns[columnIndex].cards[cardIndex].task = task;
 	this.emitChange();
 };
 

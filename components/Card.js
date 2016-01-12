@@ -27,7 +27,6 @@ var Card = React.createClass({
             </div>
           </div>
         }
-        
       </div>
     );
   },
@@ -37,7 +36,7 @@ var Card = React.createClass({
   },
 
   changeTaskValue: function (e) {
-    CardStore.updateTask(this.props.index, e.target.value);
+    CardStore.updateTask(this.props.columnIndex, this.props.cardIndex, e.target.value);
   },
 
   styles: {
