@@ -32,11 +32,11 @@ var Card = React.createClass({
     );
   },
 
-  toggleEdit: function toggleEdit () {
+  toggleEdit: function () {
     this.setState({ editMode: !this.state.editMode })
   },
 
-  changeTaskValue: function changeTaskValue (e) {
+  changeTaskValue: function (e) {
     CardStore.updateTask(this.props.index, e.target.value);
   },
 

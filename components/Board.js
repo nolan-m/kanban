@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import CardStore from '../stores/CardStore';
 
 var Board = React.createClass({
   getInitialState: function () {
@@ -8,7 +9,13 @@ var Board = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    CardStore.addChangeListener(this._onChange);
+  },
 
+  componentWillUnmount: function() {
+    CardStore.removeChangeListener(this._onChange);
+  },
 
   render: function(){
     var cards = [];
@@ -27,12 +34,12 @@ var Board = React.createClass({
     );
   },
 
-  addTask: function addTask () {
-    var cards = this.state.cards;
+  _onChange: function () {
+    this.setState(CardStore.getCurrentState());
+  },
 
-    cards.push({ task: 'New Task'});
-
-    this.setState({ cards: cards });
+  addTask: function () {
+    CardStore.createCard();
   },
 
   styles: {
