@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './Card';
+import Column from './Column';
 import CardStore from '../stores/CardStore';
 
 var Board = React.createClass({
@@ -18,17 +18,12 @@ var Board = React.createClass({
   },
 
   render: function(){
-    var cards = [];
-
-    this.state.cards.forEach(function (card, index) {
-      cards.push(<Card key={'card'+index} task={card.task} index={index} />);
-    });
 
     return (
       <div>
         <button style={this.styles.addButton} onClick={this.addTask}>Add Task</button>
         <div style={this.styles.board}>
-          { cards }
+          <Column title={'To Do'} cards={this.state.cards} />
         </div>
       </div>
     );
@@ -47,7 +42,8 @@ var Board = React.createClass({
       border: '1px solid black',
       background: '#999',
       padding: 15,
-      minHeight: 75
+      minHeight: 75,
+      height: '100%'
     },
     addButton: {
       marginBottom: 10,
