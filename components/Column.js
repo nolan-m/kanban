@@ -4,11 +4,9 @@ import Card from './Card';
 var Column = React.createClass({
 
   render: function(){
-    var cards = [];
-
-    this.props.cards.forEach(function (card, index) {
-      cards.push(<Card key={'card'+index} task={card.task} cardIndex={index}  columnIndex={this.props.index} />);
-    }, this);
+    var cards = this.props.cards.map(function (card, index) {
+        return <Card key={'card'+index} task={card.task} cardIndex={index}  columnIndex={this.props.index} />;
+      }, this);
 
     return (
       <div style={this.styles.column}>

@@ -36,10 +36,16 @@ var Board = React.createClass({
     );
   },
 
+  /**
+   * Handles change from the store.  Sets the new state in this component.
+   */
   _onChange: function () {
     this.setState(CardStore.getCurrentState());
   },
 
+  /**
+   * Adds a task though the store.
+   */
   addTask: function () {
     CardStore.createCard();
   },

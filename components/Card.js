@@ -31,10 +31,17 @@ var Card = React.createClass({
     );
   },
 
+  /**
+   * Toggles the edit state of a card.
+   */
   toggleEdit: function () {
     this.setState({ editMode: !this.state.editMode })
   },
 
+  /**
+   * Handles change from task input field.  Changes the card task through the store.
+   * @param {e} event
+   */
   changeTaskValue: function (e) {
     CardStore.updateTask(this.props.columnIndex, this.props.cardIndex, e.target.value);
   },
