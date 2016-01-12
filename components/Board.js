@@ -7,11 +7,16 @@ var Board = React.createClass({
       cards: [] 
     };
   },
+
+
+
   render: function(){
     var cards = [];
-    this.state.cards.forEach(function (card) {
-      cards.push(<Card task={card.task} />);
+
+    this.state.cards.forEach(function (card, index) {
+      cards.push(<Card key={'card'+index} task={card.task} index={index} />);
     });
+
     return (
       <div>
         <button style={this.styles.addButton} onClick={this.addTask}>Add Task</button>

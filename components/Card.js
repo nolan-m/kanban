@@ -1,16 +1,12 @@
 import React from 'react';
+import CardStore from '../stores/CardStore';
 
 var Card = React.createClass({
 
   getInitialState: function () {
     return {
-      editMode: false,
-      task: ''
+      editMode: false
     };
-  },
-
-  componentWillMount: function () {
-    this.setState({ task: this.props.task});
   },
 
   render: function(){
@@ -18,14 +14,14 @@ var Card = React.createClass({
       <div style={this.styles.card}>
         { this.state.editMode ? 
           <div>
-            <input ref='taskInput' value={this.state.task} onChange={this.changeTaskValue}></input>
+            <input ref='taskInput' value={this.props.task} onChange={this.changeTaskValue}></input>
             <div>
               <button onClick={this.toggleEdit}>Done</button>
             </div>
           </div>
           :
           <div>
-            <p style={this.styles.task}>{this.state.task}</p>
+            <p style={this.styles.task}>{this.props.task}</p>
             <div>
               <button onClick={this.toggleEdit}>Edit</button>
             </div>
@@ -41,7 +37,7 @@ var Card = React.createClass({
   },
 
   changeTaskValue: function changeTaskValue (e) {
-    this.setState({ task: e.target.value });
+    CardStore.updateTask(this.props.index, e.target.value);
   },
 
   styles: {
