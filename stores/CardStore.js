@@ -47,16 +47,17 @@ CardStore.updateTask = function (columnIndex, cardIndex, task) {
 	this.emitChange();
 };
 
-CardStore.moveToColumn = function (columnIndex, cardIndex, task) {
-	var toColumn = columnIndex + 1,
-		columns = this.getCurrentState().columns,
+CardStore.moveToColumn = function (toColumn, currentColumn, cardIndex) {
+	var columns = this.getCurrentState().columns,
 		card;
 
 	if (toColumn >= columns.length) {
 		toColumn = columns.length - 1;
+	} else if (toColumn < 0) {
+		toColumn = 0;
 	}
 
-	card = columns[columnIndex].cards.splice(cardIndex, 1)[0];
+	card = columns[currentColumn].cards.splice(cardIndex, 1)[0];
 
 	columns[toColumn].cards.push(card);
 	this.emitChange();

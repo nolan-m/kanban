@@ -30,7 +30,8 @@ var Card = React.createClass({
           <div>
             <p style={this.styles.task}>{this.props.task}</p>
             <div>
-              <button onClick={this.completeTask}>Move to Next</button>
+              <button onClick={this.moveToColumn.bind(this, this.props.columnIndex - 1)}>Move to Previous</button>
+              <button onClick={this.moveToColumn.bind(this, this.props.columnIndex + 1)}>Move to Next</button>
               <button onClick={this.toggleEdit}>Edit</button>
             </div>
           </div>
@@ -54,9 +55,12 @@ var Card = React.createClass({
     CardStore.updateTask(this.props.columnIndex, this.props.cardIndex, e.target.value);
   },
 
-  completeTask: function (e) {
-    var toColumn = this.props.columnIndex + 1;
-    CardStore.moveToColumn(this.props.columnIndex, this.props.cardIndex, e.target.value);
+  /**
+   * Handles moving a card to either previous or next column based on given column index
+   * @param {e} toColumn - column index to move card to
+   */
+  moveToColumn: function (toColumn) {
+    CardStore.moveToColumn(toColumn, this.props.columnIndex, this.props.cardIndex);
   },
 
   handleDrag: function (e) {
