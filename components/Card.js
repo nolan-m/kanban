@@ -9,6 +9,13 @@ var Card = React.createClass({
     };
   },
 
+  componentDidUpdate: function (prevProps, prevState) {
+    // select input contents only if it is the first time entering edit mode
+    if (this.refs.taskInput !== undefined && this.state.editMode !== prevState.editMode) {
+      this.refs.taskInput.select();
+    }
+  },
+
   render: function(){
     return (
       <div style={this.styles.card}>
@@ -35,7 +42,7 @@ var Card = React.createClass({
    * Toggles the edit state of a card.
    */
   toggleEdit: function () {
-    this.setState({ editMode: !this.state.editMode })
+    this.setState({ editMode: !this.state.editMode });
   },
 
   /**
