@@ -4,7 +4,7 @@ var CHANGE_EVENT = 'change';
 
 var CardStore = new EventEmitter();
 
-var curentState = {
+var currentState = {
 	columns: [
 		{
 			title: 'To Do',
@@ -26,7 +26,7 @@ CardStore.emitChange = function() {
 };
 
 CardStore.getCurrentState = function () {
-	return curentState;
+	return currentState;
 };
 
 CardStore.addChangeListener = function(callback) {
@@ -43,7 +43,22 @@ CardStore.createCard = function () {
 };
 
 CardStore.updateTask = function (columnIndex, cardIndex, task) {
-	curentState.columns[columnIndex].cards[cardIndex].task = task;
+	this.getCurrentState().columns[columnIndex].cards[cardIndex].task = task;
+	this.emitChange();
+};
+
+CardStore.moveToColumn = function (columnIndex, cardIndex, task) {
+	var toColumn = columnIndex + 1,
+		columns = this.getCurrentState().columns,
+		card;
+
+	if (toColumn >= columns.length) {
+		toColumn = columns.length - 1;
+	}
+
+	card = columns[columnIndex].cards.splice(cardIndex, 1)[0];
+
+	columns[toColumn].cards.push(card);
 	this.emitChange();
 };
 

@@ -30,6 +30,7 @@ var Card = React.createClass({
           <div>
             <p style={this.styles.task}>{this.props.task}</p>
             <div>
+              <button onClick={this.completeTask}>Move to Next</button>
               <button onClick={this.toggleEdit}>Edit</button>
             </div>
           </div>
@@ -51,6 +52,15 @@ var Card = React.createClass({
    */
   changeTaskValue: function (e) {
     CardStore.updateTask(this.props.columnIndex, this.props.cardIndex, e.target.value);
+  },
+
+  completeTask: function (e) {
+    var toColumn = this.props.columnIndex + 1;
+    CardStore.moveToColumn(this.props.columnIndex, this.props.cardIndex, e.target.value);
+  },
+
+  handleDrag: function (e) {
+    console.log('drag');
   },
 
   styles: {
