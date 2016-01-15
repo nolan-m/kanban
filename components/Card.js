@@ -21,18 +21,18 @@ var Card = React.createClass({
       <div style={this.styles.card}>
         { this.state.editMode ? 
           <div>
-            <input ref='taskInput' value={this.props.task} onChange={this.changeTaskValue}></input>
+            <input style={this.styles.taskInput} ref='taskInput' value={this.props.task} onChange={this.changeTaskValue}></input>
             <div>
-              <button onClick={this.toggleEdit}>Done</button>
+              <button style={this.styles.editButton} onClick={this.toggleEdit}>Done</button>
             </div>
           </div>
           :
           <div>
-            <p style={this.styles.task}>{this.props.task}</p>
-            <div>
-              <button onClick={this.moveToColumn.bind(this, this.props.columnIndex - 1)}>Move to Previous</button>
-              <button onClick={this.moveToColumn.bind(this, this.props.columnIndex + 1)}>Move to Next</button>
-              <button onClick={this.toggleEdit}>Edit</button>
+            <div style={this.styles.task}><span style={this.styles.click} onClick={this.toggleEdit}>{this.props.task}</span></div>
+
+            <div style={this.styles.navContainer}>
+              <button style={this.styles.navPrevButton} onClick={this.moveToColumn.bind(this, this.props.columnIndex - 1)}>Move to Previous</button>
+              <button style={this.styles.navNextButton} onClick={this.moveToColumn.bind(this, this.props.columnIndex + 1)}>Move to Next</button>
             </div>
           </div>
         }
@@ -73,12 +73,44 @@ var Card = React.createClass({
       width: 250,
       padding: 15,
       marginBottom: 10,
-      background: '#F2F2F2'
+      background: '#F2F2F2',
+      display: 'inline-block'
     },
     task: {
       fontWeight: 700,
       margin: 5,
       fontSize: 18
+    },
+    taskInput: {
+      width: '100%',
+      marginBottom: 10
+    },
+    click: {
+      cursor: 'pointer'
+    },
+    editButton: {
+      float: 'right',
+      height: 24,
+      fontSize: 12,
+      padding: 5,
+      cursor: 'pointer'
+    },
+    navContainer: {
+      marginTop: 20
+    },
+    navPrevButton: {
+      float: 'left',
+      height: 24,
+      fontSize: 12,
+      padding: 5,
+      cursor: 'pointer'
+    },
+    navNextButton: {
+      float: 'right',
+      height: 24,
+      fontSize: 12,
+      padding: 5,
+      cursor: 'pointer'
     }
   }
 
