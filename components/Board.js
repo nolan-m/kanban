@@ -1,6 +1,6 @@
 import React from 'react';
 import Column from './Column';
-import CardStore from '../stores/CardStore';
+import KanbanStore from '../stores/KanbanStore';
 
 var Board = React.createClass({
   getInitialState: function () {
@@ -10,15 +10,15 @@ var Board = React.createClass({
   },
 
   componentWillMount: function () {
-    this.setState(CardStore.getCurrentState());
+    this.setState(KanbanStore.getCurrentState());
   },
 
   componentDidMount: function() {
-    CardStore.addChangeListener(this._onChange);
+    KanbanStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    CardStore.removeChangeListener(this._onChange);
+    KanbanStore.removeChangeListener(this._onChange);
   },
 
   render: function(){
@@ -40,14 +40,14 @@ var Board = React.createClass({
    * Handles change from the store.  Sets the new state in this component.
    */
   _onChange: function () {
-    this.setState(CardStore.getCurrentState());
+    this.setState(KanbanStore.getCurrentState());
   },
 
   /**
    * Adds a task though the store.
    */
   addTask: function () {
-    CardStore.createCard();
+    KanbanStore.createCard();
   },
 
   styles: {

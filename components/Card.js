@@ -1,5 +1,5 @@
 import React from 'react';
-import CardStore from '../stores/CardStore';
+import KanbanStore from '../stores/KanbanStore';
 
 var Card = React.createClass({
 
@@ -52,7 +52,7 @@ var Card = React.createClass({
    * @param {e} event
    */
   changeTaskValue: function (e) {
-    CardStore.updateTask(this.props.columnIndex, this.props.cardIndex, e.target.value);
+    KanbanStore.updateTask(this.props.columnIndex, this.props.cardIndex, e.target.value);
   },
 
   /**
@@ -60,7 +60,7 @@ var Card = React.createClass({
    * @param {e} toColumn - column index to move card to
    */
   moveToColumn: function (toColumn) {
-    CardStore.moveToColumn(toColumn, this.props.columnIndex, this.props.cardIndex);
+    KanbanStore.moveToColumn(toColumn, this.props.columnIndex, this.props.cardIndex);
   },
 
   handleDrag: function (e) {
