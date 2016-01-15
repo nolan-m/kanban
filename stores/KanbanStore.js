@@ -63,5 +63,12 @@ KanbanStore.moveToColumn = function (toColumn, currentColumn, cardIndex) {
 	this.emitChange();
 };
 
+KanbanStore.setColumnTitle = function (columnIndex, title) {
+	var columns = this.getCurrentState().columns;
+
+	columns[columnIndex].title = title;
+	this.emitChange();
+};
+
 
 export default KanbanStore
