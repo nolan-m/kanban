@@ -29,10 +29,17 @@ var Column = React.createClass({
     );
   },
 
+  /**
+   * Toggles the edit state of a column.
+   */
   toggleEditMode: function () {
     this.setState({ editMode: !this.state.editMode });
   },
 
+  /**
+   * Handles change from column title input field.  Changes the column title through the store.
+   * @param {e} event
+   */
   handleNameChange: function (e) {
     KanbanStore.setColumnTitle(this.props.index, e.target.value);
   },
